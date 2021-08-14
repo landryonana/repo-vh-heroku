@@ -155,25 +155,31 @@ def index_rapport(request):
         context['current_month_str_search'] = month_name(int(current_month_search))
     else:
         #======================STAT PAR SITE==============================================================
-        sites = Site.objects.all()
-        for st in sites:
-            site = {
-                'nom': st.nom_site_evangelisation,
-                'count_oui': st.personnes_evangelise.filter(accepte_jesus='oui'),
-                'count_non': st.personnes_evangelise.filter(accepte_jesus='non'),
-                'count_deja': st.personnes_evangelise.filter(accepte_jesus='déjà'),
-                'count_indecis': st.personnes_evangelise.filter(accepte_jesus='ras'),
-                'total': st.personnes_evangelise.all()
-            }
-            sites_person.append(site)
-        context['sites_person'] = sites_person
-        context['sites_person_len'] = len(sites_person)
+        try:
+            sites = Site.objects.all()
+            for st in sites:
+                site = {
+                    'nom': st.nom_site_evangelisation,
+                    'count_oui': st.personnes_evangelise.filter(accepte_jesus='oui'),
+                    'count_non': st.personnes_evangelise.filter(accepte_jesus='non'),
+                    'count_deja': st.personnes_evangelise.filter(accepte_jesus='déjà'),
+                    'count_indecis': st.personnes_evangelise.filter(accepte_jesus='ras'),
+                    'total': st.personnes_evangelise.all()
+                }
+                sites_person.append(site)
+            context['sites_person'] = sites_person
+            context['sites_person_len'] = len(sites_person)
+        except:
+            pass
         #======================RAPPORT MENSUEL==============================================================
         all_evang = []
         liste_mois = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
         for mois in liste_mois:
-            evangs = Evangelisation.objects.filter(day__month=mois)
-            all_evang.append(month_evang(evangs, mois))
+            try:
+                evangs = Evangelisation.objects.filter(day__month=mois)
+                all_evang.append(month_evang(evangs, mois))
+            except:
+                pass
         
         #======================PIE ET CHRT BAR============================================================================
         personnes = Person.objects.filter(date__year=date.today().year)
@@ -187,7 +193,10 @@ def index_rapport(request):
         context['current_year'] = current_year
         context['current_month_str'] = month_name(int(current_month))
         context['current_month'] = int(current_month)
-        context['evnag_actif'] = get_object_or_404(Evangelisation, actif="oui")
+        try:
+            context['evnag_actif'] = get_object_or_404(Evangelisation, actif="oui")
+        except:
+            pass
 
 
     context['personne_oui'] = personne_oui
