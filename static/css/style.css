@@ -889,7 +889,7 @@ button:hover .title{
     .home-section nav{
         width: calc(100% - 40px);
         left: 40px;
-        height: 17% !important;
+        height: 25% !important;
     }
 
     .sidebar.active ~ .home-section nav{
