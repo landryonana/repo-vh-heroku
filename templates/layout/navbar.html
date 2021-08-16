@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="profile-details">
-            <img src="{% static 'images/profile.png' %}" alt="">
-            <span class="admin_name">Bienvenue , {{request.user}}</span>
+            <img src="{% if user.profile.image %}{{ user.profile.image.url }}
+                      {% else %}{% static 'images/profile.png' %}{% endif %}" alt="">
             <div class="dropdo">
                 <ul>
                     <li {% if active == 'index_hone' %}class="active"{% endif %}>
