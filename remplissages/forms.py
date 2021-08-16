@@ -49,6 +49,7 @@ class PersonForm(forms.ModelForm):
         quartier = cleaned_data.get("quartier_d_habitation")
         accepte_jesus = cleaned_data.get("accepte_jesus")
         sexe = cleaned_data.get("sexe")
+        site_evangelisation = cleaned_data.get("site_evangelisation")
 
         msg1 = "Merci de renseigner ce champ"
         if accepte_jesus=="---------":
@@ -61,6 +62,11 @@ class PersonForm(forms.ModelForm):
             self.add_error('quartier_d_habitation', msg)
         if len(nom_prenom)<=2:
             self.add_error('nom_et_prenom', msg)
+        
+        evangelisation = Evangelisation.objects.filter(actif="oui").last()
+        msg1 = f"le lieu de {evangelisation} est {evangelisation.site}"
+        if evangelisation.site != site_evangelisation.nom_site_evangelisation:
+            self.add_error('site_evangelisation', msg1)
     
     def clean_contacts(self):
         contact = self.cleaned_data['contacts']
