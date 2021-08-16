@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');
 
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Quicksand', sans-serif;
 }
 
 body{
@@ -105,7 +105,7 @@ body{
     top: 0;
     right: 0;
     background: #fff;
-    padding: 0 20px;
+    padding: 8px 0px;
     display: flex;
     align-items: center;
     box-shadow: 0 0 5px #ccc;
@@ -116,7 +116,7 @@ body{
 
 nav .nav-bar-first{
     position: relative;
-    top: 21px;
+    top: 15px;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -136,7 +136,7 @@ nav .nav-bar-first{
     display: flex;
     align-items: start;
     font-size: 25px;
-    font-weight: 500;
+    font-weight: 600;
     /* margin-top: -10px; */
 }
 
@@ -182,21 +182,25 @@ nav .search-box .bx-search{
 .home-section nav .profile-details{
     position: relative;
     display: flex;
-    align-items: center;
-    height: 45px;
-    min-width: 165px;
+    align-items: flex-end;
+    height: 60px;
+    /* min-width: 165px; */
     /* background: #F5F6FA; */
-    border: 2px solid #006c69 !important;
+    /* border: 2px solid #006c69 !important; */
     border-radius: 6px;
-    padding: 0 0px 0 2px;
+    flex-direction: column;
+    margin-right: 15px;
+    padding: 0 7px 0 2px;
 }
 
 .home-section nav .dropdo{
     position: absolute;
     display: none;
-    top: 38px;
+    top: 58px;
     left: 0;
-    right: 0;
+    width: 165px;
+    left: -125px;
+    right: 5px;
     background-color: #006c69;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
     border-radius: 7px;
@@ -242,7 +246,8 @@ nav .profile-details img{
     height: 40px;
     width: 40px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 150px;
+    margin-top: 0;
 }
 
 
@@ -649,7 +654,7 @@ button:hover .title{
         /* align-items: center; */
     }
     .rempl-infos-submit{
-        top: 132px !important;
+        top: 89px !important;
         /* background: antiquewhite; */
     }
     .h2{
@@ -683,7 +688,7 @@ button:hover .title{
     .home-section nav{
         width: calc(100% - 40px);
         left: 40px;
-        height: 18%;
+        height: 10%;
     }
 
     .sidebar.active ~ .home-section nav{
@@ -707,7 +712,7 @@ button:hover .title{
     }
 
     nav .nav-bar-first{
-        flex-direction: column;
+        /* flex-direction: column; */
         /* height: 27%; */
     }
 
@@ -772,10 +777,12 @@ button:hover .title{
         width: 100% !important;
     }
     .home-section nav .sidebar-button {
-        margin-top: -10px;
+        /* margin-top: -10px; */
     }
     .home-section nav .dropdo{
         top: 43px;
+        /* width: 100%; */
+        /* left: -125px; */
     }
     .rapport-person {
         margin-top: -25px !important;
@@ -889,7 +896,7 @@ button:hover .title{
     .home-section nav{
         width: calc(100% - 40px);
         left: 40px;
-        height: 25% !important;
+        height: 13% !important;
     }
 
     .sidebar.active ~ .home-section nav{
@@ -913,9 +920,9 @@ button:hover .title{
     }
 
     nav .nav-bar-first{
-        flex-direction: column;
+        /* flex-direction: column; */
         /* height: 27%; */
-        background: #fff;
+        /* background: #fff; */
     }
 
     .navbar-head{
@@ -944,8 +951,9 @@ button:hover .title{
         padding: 10px 15px 10px 0px;
     }
     .site-evang{
-        margin-top: 10px;
-        width: auto !important;
+        margin-top: 35px;
+        height: 250px !important;
+        width: 100% !important;
     }
 
     .image_login{
