@@ -74,6 +74,7 @@
 .user_update img{
     border-radius: 50px;
     text-align: -webkit-center;
+    height: 100% !important
 }
 .wrap_user_infos{
     padding: 125px 0px 0px 0px;
