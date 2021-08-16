@@ -65,7 +65,7 @@ class PersonForm(forms.ModelForm):
         
         evangelisation = Evangelisation.objects.filter(actif="oui").last()
         msg1 = f"le lieu de {evangelisation} est {evangelisation.site}"
-        if evangelisation.site != site_evangelisation.nom_site_evangelisation:
+        if str(evangelisation.site) != str(site_evangelisation.nom_site_evangelisation):
             self.add_error('site_evangelisation', msg1)
     
     def clean_contacts(self):
@@ -75,7 +75,6 @@ class PersonForm(forms.ModelForm):
         else:
             if len(str(contact))==9:
                 contact_6 = str(contact)[0]
-                print(contact_6)
                 if int(contact_6)!=6:
                     raise forms.ValidationError("Le numéro de télephone doit commencer par 6")
         return contact
