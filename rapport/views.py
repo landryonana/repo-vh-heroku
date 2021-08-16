@@ -115,7 +115,7 @@ def index_rapport(request):
         evangs_sites = Evangelisation.objects.filter(day__month=month, day__year=year)
         for evang in evangs_sites:
             site = {
-                'nom': evang.site.nom_site_evangelisation,
+                'nom': str(evang.site.nom_site_evangelisation),
                 'count_oui': evang.site.personnes_evangelise.filter(accepte_jesus='oui'),
                 'count_non': evang.site.personnes_evangelise.filter(accepte_jesus='non'),
                 'count_deja': evang.site.personnes_evangelise.filter(accepte_jesus='déjà'),
@@ -198,7 +198,6 @@ def index_rapport(request):
         except:
             pass
 
-
     context['personne_oui'] = personne_oui
     context['personne_non'] = personne_non
     context['personne_deja'] = personne_deja
@@ -219,23 +218,3 @@ def rapport_evang_detail_sortie(request, mois):
     return JsonResponse(data)
 
 
-
-def rapport_pdf(request):
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment;filename=Évangelisation'+\
-        str(datetime.datetime.now())+'.pdf'
-    response['Content-Transfer-Encoding'] = 'binary'
-    html_string = render_to_string('rapport/pdf_output.html', {'personnes':Person.objects.all()})
-    html = HTML(string=html_string)
-    result = html.write_pdf()
-
-    with tempfile.NamedTemporaryFile(delete=True) as output:
-        output.write(result)
-        output.flush()
-        output=open(output.name, 'rb')
-        response.write(output.read())
-    return response
-
-
-def rapport_excel(request):
-    return
