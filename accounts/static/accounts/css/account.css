@@ -63,6 +63,7 @@
 .user_img img, .user_detail_modal img{
     border-radius: 50px;
     text-align: -webkit-center;
+    height: 100% !important
 }
 
 
