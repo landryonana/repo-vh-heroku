@@ -407,20 +407,24 @@ def add_site(request):
     is_save = False
     context = dict()
 
-    form = SiteForm(request.POST, files=request.FILES or None)
-    if form.is_valid():
-        site = form.save(commit=False)
-        site.author = request.user
-        site.save()
-        History.objects.create(
-            user=request.user,
-            content_object=f"LIEU D'ÉVANGELISATION:::{site}",
-            action_type="ajout de"
-        )
-        is_save = True
-        request.session['is_save'] = is_save
-        request.session['site_ajout'] = {'nom':site.nom_site_evangelisation}
-        return redirect('rempl:liste_site')
+    
+    if request.method == 'POST':
+        form = SiteForm(request.POST, files=request.FILES)
+        if form.is_valid():
+            site = form.save(commit=False)
+            site.author = request.user
+            site.save()
+            History.objects.create(
+                user=request.user,
+                content_object=f"LIEU D'ÉVANGELISATION:::{site}",
+                action_type="ajout de"
+            )
+            is_save = True
+            request.session['is_save'] = is_save
+            request.session['site_ajout'] = {'nom':site.nom_site_evangelisation}
+            return redirect('rempl:liste_site')
+    else:
+        form = SiteForm()
     context['form'] = form
     active = "index_rempl"
     context['active'] = active
