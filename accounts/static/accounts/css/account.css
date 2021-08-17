@@ -63,7 +63,12 @@
 .user_img img, .user_detail_modal img{
     border-radius: 50px;
     text-align: -webkit-center;
-    height: 100% !important
+    height: 100% !important;
+}
+
+.user_detail_modal{
+    height: 300px;
+    width: 300px;
 }
 
 
@@ -74,7 +79,7 @@
 .user_update img{
     border-radius: 50px;
     text-align: -webkit-center;
-    height: 100% !important
+    height: 100%;
 }
 .wrap_user_infos{
     padding: 125px 0px 0px 0px;
