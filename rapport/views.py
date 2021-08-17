@@ -112,41 +112,50 @@ def index_rapport(request):
         year = month_split[0]
         month = month_split[1]
         #======================STAT PAR SITE==============================================================
-        evangs_sites = Evangelisation.objects.filter(day__month=month, day__year=year)
-        for evang in evangs_sites:
-            site = {
-                'nom': str(evang.site.nom_site_evangelisation),
-                'count_oui': evang.site.personnes_evangelise.filter(accepte_jesus='oui'),
-                'count_non': evang.site.personnes_evangelise.filter(accepte_jesus='non'),
-                'count_deja': evang.site.personnes_evangelise.filter(accepte_jesus='déjà'),
-                'count_indecis': evang.site.personnes_evangelise.filter(accepte_jesus='ras'),
-                'total': evang.site.personnes_evangelise.all()
-            }
-            sites_person.append(site)
-        site_list = []
-        for site in sites_person:
-            if len(site_list)>0:
-                for elt in site_list:
-                    if site['nom']==elt['nom']:
-                        continue
-                    else:
-                        site_list.append(site)
-            else:
-                site_list.append(site)
-        context['sites_person'] = site_list
-        context['sites_person_len'] = len(site_list)
+        try:
+            evangs_sites = Evangelisation.objects.filter(day__month=month, day__year=year)
+            for evang in evangs_sites:
+                site = {
+                    'nom': str(evang.site.nom_site_evangelisation),
+                    'count_oui': evang.site.personnes_evangelise.filter(accepte_jesus='oui'),
+                    'count_non': evang.site.personnes_evangelise.filter(accepte_jesus='non'),
+                    'count_deja': evang.site.personnes_evangelise.filter(accepte_jesus='déjà'),
+                    'count_indecis': evang.site.personnes_evangelise.filter(accepte_jesus='ras'),
+                    'total': evang.site.personnes_evangelise.all()
+                }
+                sites_person.append(site)
+            site_list = []
+            for site in sites_person:
+                if len(site_list)>0:
+                    for elt in site_list:
+                        if site['nom']==elt['nom']:
+                            continue
+                        else:
+                            site_list.append(site)
+                else:
+                    site_list.append(site)
+            context['sites_person'] = site_list
+            context['sites_person_len'] = len(site_list)
+        except:
+            pass
         #======================RAPPORT MENSUEL==============================================================
-        all_evang = []
-        evangs = Evangelisation.objects.filter(day__month=month, day__year=year)
-        all_evang.append(month_evang(evangs, month))
+        try:
+            all_evang = []
+            evangs = Evangelisation.objects.filter(day__month=month, day__year=year)
+            all_evang.append(month_evang(evangs, month))
+        except:
+            pass
 
         #======================PIE ET CHRT BAR============================================================================
-        personnes = Person.objects.filter(date__month=month, date__year=year)
-        if personnes:
-            personne_oui = personnes.filter(accepte_jesus='oui')
-            personne_non = personnes.filter(accepte_jesus='non')
-            personne_deja = personnes.filter(accepte_jesus='déjà')
-            personne_indecis = personnes.filter(accepte_jesus='ras')
+        try:
+            personnes = Person.objects.filter(date__month=month, date__year=year)
+            if personnes:
+                personne_oui = personnes.filter(accepte_jesus='oui')
+                personne_non = personnes.filter(accepte_jesus='non')
+                personne_deja = personnes.filter(accepte_jesus='déjà')
+                personne_indecis = personnes.filter(accepte_jesus='ras')
+        except:
+            pass
 
         current_month_search = str(month)
         current_year_search = str(year)
