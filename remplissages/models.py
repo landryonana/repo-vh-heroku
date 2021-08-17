@@ -46,7 +46,7 @@ class Evangelisation(models.Model):
         ('oui', 'Oui'),
         ('non', 'Non')
     )
-    day = models.DateField(verbose_name="Jour d'évangélisation", default=timezone.now)
+    day = models.DateField(verbose_name="Jour d'évangélisation", default=timezone.now, unique=True)
     heure_de_debut = models.TimeField(default=timezone.now, verbose_name="Heure de début")
     heure_de_fin = models.TimeField(default=timezone.now, verbose_name="Heure de fin")
     site = models.ForeignKey(Site, related_name="evangelisations", verbose_name="Lieu d'évangelisation", on_delete=models.SET_NULL, blank=True,  null=True)
@@ -172,7 +172,7 @@ class Profile(models.Model):
         ('féminin', 'Féminin')
     )
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True,  null=True)
-    image = models.ImageField(upload_to='images/profile/%Y/%m/%d/', null=True, blank=True, help_text="ajouter une photo")
+    image = models.ImageField(upload_to='images/profile/%Y/', null=True, blank=True, help_text="ajouter une photo")
     phone = models.PositiveIntegerField(null=True, unique=True, blank=True, default=0, help_text="le numéro de télephone doit avoir 9 chiffres")
     sexe = models.CharField(choices=SEXE, max_length=15, verbose_name='Sexe')
     created = models.DateTimeField(auto_now_add=True)
